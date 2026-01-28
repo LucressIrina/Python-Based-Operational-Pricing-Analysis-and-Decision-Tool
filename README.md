@@ -13,7 +13,7 @@ Flight Prices - Resume Project - Sheet2.csv   -   Raw flight price data (City, M
 flight_analysis.py	                          -   Python script that cleans the data and finds the cheapest month per city
 setup_database.sql                            -   SQL file to create a table structure for flight prices
 flight_prices.db                              -   SQLite database (for storing flight prices)
-README.me                                     -   Project documentation
+README.md                                     -   Project documentation
 
 
 # Technologies Used
@@ -88,4 +88,5 @@ You can store the cleaned CSV in SQLite and query it with Python using sqlite3.
 - Problem-solving and stepwise reasoning
 - Ability to optimize manual approaches into scalable code
 - Preparing data for database storage
+
 
