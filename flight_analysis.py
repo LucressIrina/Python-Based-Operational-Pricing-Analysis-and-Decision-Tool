@@ -79,9 +79,6 @@ idx_min = df.groupby('City')['Avg_Price'].idxmin()
 #### Advanced Method - Step 2: Pull the rows from the original dataframe
 cheapest_months = df.loc[idx_min]
 
-#### Advanced Method - Step 3: View Results
-#print(cheapest_months)
-
 
 ### Question 2 - What is the most expensive month to visit each city?
 
@@ -92,9 +89,6 @@ Palermo_max_price = Palermo_df['Avg_Price'].max()
 
 ## Step 2: 
 Palermo_max_month = Palermo_df [Palermo_df['Avg_Price'] == Palermo_max_price]
-
-## Step 3: View Results
-#print(Palermo_max_month)
 
 
 #### Advanced Method:
@@ -131,3 +125,4 @@ pd.set_option('display.max_columns', None)
 
 #### Advanced Method - Step 4: View Results
 result.to_csv('Pricing_Summary.csv', index = False)
+
