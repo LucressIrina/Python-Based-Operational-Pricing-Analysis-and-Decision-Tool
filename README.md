@@ -1,10 +1,11 @@
+# Python-Based Operational Pricing Analysis and Decision Tool
 ***This travel price analysis tool evaluates prior flight pricing trends and generates best-time-to-book recommendations for global destinations:
 
-- Analyzes average flight prices by city and month
-- Identifies lower cost and higher cost travel periods
-- Provides simple booking recommendations based on observed price trends.
-
-
+# Business Objective
+- Identify lowest-cost travel windows
+- Detect price volatility patterns
+- Support planning/cost optimization
+- Provide repeatable automated analysis
 
 
 # Files in this Project
@@ -83,10 +84,16 @@ You can store the cleaned CSV in SQLite and query it with Python using sqlite3.
 
 # Skills Demonstrated
 
-- Python data manipulation
-- Pandas filtering, aggregation, and grouping
-- Problem-solving and stepwise reasoning
-- Ability to optimize manual approaches into scalable code
-- Preparing data for database storage
+- Python for operational data analysis
+- Data cleaning & transformation (Pandas)
+- Aggregation & vectorized computation
+- Translating data into decision insights
+- Automation of repeatable analysis workflows
+- SQL database integration
+- Structuring reusable analysis pipelines
 
 
+# Operational Insight
+- Cities with highest volatility = best for flexible booking strategy
+- Cities with lowest volatility = stable pricing environments
+- Highest % price swing = potential cost optimization window
