@@ -16,7 +16,7 @@ df['Avg_Price'] = df['Avg_Price'].str.replace(',', '', regex = False)
 df['Avg_Price'] = df['Avg_Price'].astype(float)
 
 
-### Question - What is the cheapest month to visit each city?
+### Question 1 - What is the cheapest month to visit each city?
 
 ## Step 1: Filter for Palmero prices for each month
 
@@ -33,7 +33,7 @@ Palermo_min_price = Palermo_df['Avg_Price'].min()
 Palermo_min_month = Palermo_df [Palermo_df['Avg_Price'] == Palermo_min_price]
 
 
-### Now repeat these 3 steps for all the cities (Manual Version)
+### Now repeat these 3 steps for all the cities - Demonstration of manual vs scalable approach
 
 """" 
 # Montevideo
@@ -73,11 +73,61 @@ Nairobi_min_month = Nairobi_df [Nairobi_df['Avg_Price'] == Nairobi_min_price]
 
 """""
 
-# Advanced Method - Step 1: Group dataframe into one group per city and return the min prices for each row within each city
-idx = df.groupby('City')['Avg_Price'].idxmin()
+#### Advanced Method - Step 1: Group dataframe into one group per city and return the min prices for each row within each city
+idx_min = df.groupby('City')['Avg_Price'].idxmin()
 
-# Advanced Method - Step 2: Pull the rows from the original dataframe
-cheapest_months = df.loc[idx]
+#### Advanced Method - Step 2: Pull the rows from the original dataframe
+cheapest_months = df.loc[idx_min]
 
-# Advanced Method - Step 3: Print Results
-print(cheapest_months)
+#### Advanced Method - Step 3: View Results
+#print(cheapest_months)
+
+
+### Question 2 - What is the most expensive month to visit each city?
+
+# Demonstration of manual vs scalable approach
+
+## Step 1: Find the most expensive flight price of Palermo using the max value
+Palermo_max_price = Palermo_df['Avg_Price'].max()
+
+## Step 2: 
+Palermo_max_month = Palermo_df [Palermo_df['Avg_Price'] == Palermo_max_price]
+
+## Step 3: View Results
+#print(Palermo_max_month)
+
+
+#### Advanced Method:
+idx_max = df.groupby('City')['Avg_Price'].idxmax()
+
+most_expensive_months = df.loc[idx_max]
+
+# print(most_expensive_months)
+
+
+### Question 3 - What is the % difference between cheapest and most expensive months?
+
+# Demonstration of manual vs scalable approach
+Palermo_percent_difference = (Palermo_max_price - Palermo_min_price)/Palermo_min_price * 100
+
+#print(Palermo_percent_difference)
+
+
+#### Advanced Method - Step 1: Merge the most expensive dataframe with the cheapest dataframe
+expensive_cheapest_months = pd.merge(most_expensive_months, cheapest_months, on = 'City', how = 'outer')
+
+
+#### Advanced Method - Step 2: Differentiate the two Avg_Price columns and rename some columns for clarity
+Max_price = expensive_cheapest_months['Avg_Price_x']
+Min_price = expensive_cheapest_months['Avg_Price_y']
+
+expensive_cheapest_months = expensive_cheapest_months.rename(columns = {'Avg_Price_x': 'Highest_Price', 'Avg_Price_y': 'Lowest_Price'})
+
+#### Advanced Method - Step 3: Calculate the percent difference between the most expencive and cheapest months then add the column to the dataframe
+result = expensive_cheapest_months.assign(percent_difference = (Max_price - Min_price)/Min_price * 100)
+
+
+pd.set_option('display.max_columns', None)
+
+#### Advanced Method - Step 4: View Results
+result.to_csv('Pricing_Summary.csv', index = False)
